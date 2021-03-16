@@ -35,7 +35,7 @@ export default new Router({
       component: () => import("./views/festivals/Edit.vue")
     },
     //////////////////
-    
+
     /////PERFORMERS/////
     {
       path: "/performers",
@@ -58,7 +58,7 @@ export default new Router({
       component: () => import("./views/performers/Edit.vue")
     },
     //////////////////
-    
+
     /////SHOWS/////
     {
       path: "/shows",
@@ -81,7 +81,7 @@ export default new Router({
       component: () => import("./views/shows/Edit.vue")
     },
     //////////////////
-    
+
     /////STAGE/////
     {
       path: "/stages",
@@ -102,7 +102,7 @@ export default new Router({
       path: "/stages/:id",
       name: "stages_edit",
       component: () => import("./views/stages/Edit.vue")
-    },
+    }
     //////////////////
   ]
 });

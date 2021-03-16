@@ -2,7 +2,7 @@
   <div>
     <MyNavBar />
     <b-container>
-      <br>
+      <br />
       <b-row>
         <router-view />
       </b-row>

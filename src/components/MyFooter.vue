@@ -1,18 +1,14 @@
 <template>
   <footer class="footer">
-    <br><br>
+    <br /><br />
     <h6>&copy; FestivalCloud, 2021</h6>
   </footer>
 </template>
 
-
 <script>
 export default {
-  name: "MyFooter",
+  name: "MyFooter"
 };
 </script>
 
-
-<style>
-
-</style>
+<style></style>
