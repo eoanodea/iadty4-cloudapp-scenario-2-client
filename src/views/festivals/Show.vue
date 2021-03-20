@@ -63,12 +63,7 @@ export default {
       api
         .get(`/festivals/${this.$route.params.id}`)
         .then(response => {
-          let resultFestival = response.data;
-          if (resultFestival.image_path) {
-            resultFestival.image_path = s3Url + resultFestival.image_path;
-          }
-
-          this.festival = resultFestival;
+          this.festival = response.data;
         })
         .catch(error => console.log(error));
     },

@@ -59,7 +59,6 @@ export default {
       api
         .get(`/performers/${this.$route.params.id}`)
         .then(response => {
-          console.log(response);
           this.performer = response.data;
         })
         .catch(error => console.log(error));

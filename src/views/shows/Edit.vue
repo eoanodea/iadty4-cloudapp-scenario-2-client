@@ -9,7 +9,7 @@
       <label for="start_time" class="col-md-3 control-label">Start</label>
       <div class="col-md-6">
         <input
-          type="text"
+          type="datetime-local"
           class="form-control"
           id="start_time"
           name="start_time"
@@ -23,13 +23,7 @@
     <div class="form-group">
       <label for="end_time" class="col-md-3 control-label">End</label>
       <div class="col-md-6">
-        <textarea
-          id="end_time"
-          name="end_time"
-          v-model="form.end_time"
-          rows="4"
-          cols="50"
-        ></textarea>
+        <input type="datetime-local" name="end_time" v-model="form.end_time" />
       </div>
       <div v-if="formErrors.end_time" class="col-md-3 error">
         {{ formErrors.end_time.message }}
@@ -69,7 +63,7 @@
         {{ formErrors.festival.message }}
       </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="image_path" class="col-md-3 control-label">Image</label>
       <div class="col-md-6">
         <input
@@ -85,7 +79,7 @@
       <div class="col-md-3 error">
         {{ fileError }}
       </div>
-    </div>
+    </div> -->
     <div class="form-group">
       <div class="col-md-6 col-md-offset-3">
         <a v-on:click="cancel()" class="btn btn-default">Cancel</a>
@@ -120,6 +114,8 @@ export default {
   },
   mounted() {
     this.getData();
+    this.getFestivals();
+    this.getPerformers();
   },
   methods: {
     getData() {
@@ -129,9 +125,12 @@ export default {
         .then(response => {
           console.log(response);
           this.show = response.data;
-
-          this.form.start_time = this.show.start_time;
-          this.form.end_time = this.show.end_time;
+          this.form.start_time = new Date(this.show.start_time)
+            .toISOString()
+            .slice(0, -5);
+          this.form.end_time = new Date(this.show.end_time)
+            .toISOString()
+            .slice(0, -5);
         })
         .catch(error => console.log(error));
     },
@@ -147,7 +146,12 @@ export default {
       };
 
       api
-        .put(`/shows/${this.$route.params.id}`, formData)
+        .put(`/shows/${this.$route.params.id}`, JSON.stringify(formData), {
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:8080",
+            "Content-Type": "application/json"
+          }
+        })
         .then(response => {
           console.log("Edit");
           console.log(response);

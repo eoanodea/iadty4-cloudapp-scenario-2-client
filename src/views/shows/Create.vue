@@ -116,7 +116,7 @@ export default {
       };
 
       api
-        .post("/shows/", formData)
+        .post("/shows", JSON.stringify(formData))
         .then(response => {
           console.log(response);
           this.$router.push({

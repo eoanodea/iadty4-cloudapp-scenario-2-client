@@ -147,8 +147,12 @@ export default {
           this.form.title = this.festival.title;
           this.form.description = this.festival.description;
           this.form.city = this.festival.city;
-          this.form.start_date = this.festival.start_date;
-          this.form.end_date = this.festival.end_date;
+          this.form.start_date = new Date(this.festival.start_date)
+            .toISOString()
+            .slice(0, -5);
+          this.form.end_date = new Date(this.festival.end_date)
+            .toISOString()
+            .slice(0, -5);
         })
         .catch(error => console.log(error));
     },
