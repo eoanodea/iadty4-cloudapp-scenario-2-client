@@ -13,6 +13,30 @@ export default new Router({
       name: "home",
       component: Home
     },
+    /////Register/////
+    {
+      path: "/register",
+      name: "register_index",
+      component: () => import("./views/auth/Register.vue")
+    },
+    /////Login/////
+    {
+      path: "/login",
+      name: "login_index",
+      component: () => import("./views/auth/Login.vue")
+    },
+    /////Logout/////
+    {
+      path: "/Logout",
+      name: "Logout_index",
+      component: () => import("./views/auth/Logout.vue")
+    },
+    /////Confirm/////
+    {
+      path: "/confirm",
+      name: "confirm_index",
+      component: () => import("./views/auth/Confirm.vue")
+    },
     /////FESTIVALS/////
     {
       path: "/festivals",
