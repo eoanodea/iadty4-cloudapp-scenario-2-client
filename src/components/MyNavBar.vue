@@ -11,20 +11,20 @@
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <router-link class="nav-link" to="/">Home</router-link>
-        <router-link class="nav-link" to="/festivals">Festivals</router-link>
-        <router-link class="nav-link" to="/stages">Stages</router-link>
-        <router-link class="nav-link" to="/shows">Shows</router-link>
-        <router-link class="nav-link" to="/performers">Performers</router-link>
+        <template v-if="loggedIn">
+          <router-link class="nav-link" to="/festivals">Festivals</router-link>
+          <router-link class="nav-link" to="/stages">Stages</router-link>
+          <router-link class="nav-link" to="/shows">Shows</router-link>
+          <router-link class="nav-link" to="/performers"
+            >Performers</router-link
+          >
+          <router-link class="nav-link" to="/logout">Logout</router-link>
+        </template>
 
-        <router-link v-if="loggedIn" class="nav-link" to="/logout"
-          >Logout</router-link
-        >
-
-        <span v-else>
+        <template v-else>
           <router-link class="nav-link" to="/login">Login</router-link>
-
           <router-link class="nav-link" to="/register">Register</router-link>
-        </span>
+        </template>
       </b-navbar-nav>
     </b-collapse>
   </nav>
@@ -37,6 +37,11 @@ export default {
     return {
       loggedIn: false
     };
+  },
+  mounted() {
+    if (localStorage.getItem("token")) {
+      this.loggedIn = true;
+    } else this.loggedIn = false;
   },
   watch: {
     $route(to, from, options) {
